@@ -7,6 +7,7 @@ exports.insert = function(db, doc, callback) {
   callback(null);
 };
 
+
 /*
  *  Finds all documents in the "movies" collection
  *  whose "director" field equals the given director,
@@ -15,5 +16,10 @@ exports.insert = function(db, doc, callback) {
  */
 exports.byDirector = function(db, director, callback) {
          
-  callback(null, db.collection('sample').find().toArray() );
+	db.collection('movies').find({"director": director}).sort({"title":1}).toArray(function(error, docs){
+		callback(null, docs);
+	});
+
+	
+
 };
